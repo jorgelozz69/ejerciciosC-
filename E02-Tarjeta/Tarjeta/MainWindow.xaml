@@ -1,0 +1,40 @@
+﻿<Window x:Class="Tarjeta.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tarjeta"
+        mc:Ignorable="d"
+        Title="Tarjeta de presentación"
+        Height="400"
+        Width="560"
+        MinHeight="340"
+        MinWidth="420">
+
+    <Window.Resources>
+        <!-- Pincel con el color corporativo de la tarjeta -->
+        <SolidColorBrush x:Key="ColorTarjeta" Color="#1E88E5" />
+
+        <!-- Estilo base para los botones de acción -->
+        <Style x:Key="BotonTarjeta" TargetType="Button">
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="Background" Value="#F3F4F6" />
+            <Setter Property="BorderBrush" Value="#D1D5DB" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>
