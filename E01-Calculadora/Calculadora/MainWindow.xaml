@@ -5,11 +5,147 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculadora"
         mc:Ignorable="d"
-        Title="Calculadora" Height="480" Width="320" MinHeight="380" MinWidth="260">
-    <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="24,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="256" Height="48"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="24,115,0,0" VerticalAlignment="Top" Width="76" Height="46"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="114,115,0,0" VerticalAlignment="Top" Width="76" Height="46"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="204,115,0,0" VerticalAlignment="Top" Width="76" Height="46"/>
+        Title="Calculadora"
+        Height="480"
+        Width="320"
+        MinHeight="380"
+        MinWidth="260"
+        PreviewKeyDown="Window_PreviewKeyDown">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="FontSize" Value="22" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Pantalla: Operación pendiente -->
+        <TextBlock x:Name="txtOperacion"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="4"
+                   Margin="4,2"
+                   FontSize="16"
+                   Foreground="Gray"
+                   TextAlignment="Right" />
+
+        <!-- Pantalla: Número actual / Resultado -->
+        <TextBox x:Name="txtPantalla"
+                 Grid.Row="1"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="4"
+                 Margin="4,0,4,6"
+                 FontSize="36"
+                 IsReadOnly="True"
+                 TextAlignment="Right"
+                 Text="0"
+                 AutomationProperties.Name="Resultado" />
+
+        <!-- Fila 2: C, ⌫, ÷ -->
+        <Button x:Name="btnBorrar"
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Content="C"
+                Click="btnBorrar_Click" />
+        <Button x:Name="btnRetroceso"
+                Grid.Row="2"
+                Grid.Column="2"
+                Content="⌫"
+                Click="btnRetroceso_Click"
+                AutomationProperties.Name="Borrar la última cifra" />
+        <Button Grid.Row="2"
+                Grid.Column="3"
+                Content="÷"
+                Click="btnOperacion_Click" />
+
+        <!-- Fila 3: 7, 8, 9, × -->
+        <Button Grid.Row="3"
+                Grid.Column="0"
+                Content="7"
+                Click="btnDigito_Click" />
+        <Button Grid.Row="3"
+                Grid.Column="1"
+                Content="8"
+                Click="btnDigito_Click" />
+        <Button Grid.Row="3"
+                Grid.Column="2"
+                Content="9"
+                Click="btnDigito_Click" />
+        <Button Grid.Row="3"
+                Grid.Column="3"
+                Content="×"
+                Click="btnOperacion_Click" />
+
+        <!-- Fila 4: 4, 5, 6, − -->
+        <Button Grid.Row="4"
+                Grid.Column="0"
+                Content="4"
+                Click="btnDigito_Click" />
+        <Button Grid.Row="4"
+                Grid.Column="1"
+                Content="5"
+                Click="btnDigito_Click" />
+        <Button Grid.Row="4"
+                Grid.Column="2"
+                Content="6"
+                Click="btnDigito_Click" />
+        <Button Grid.Row="4"
+                Grid.Column="3"
+                Content="−"
+                Click="btnOperacion_Click" />
+
+        <!-- Fila 5: 1, 2, 3, + -->
+        <Button Grid.Row="5"
+                Grid.Column="0"
+                Content="1"
+                Click="btnDigito_Click" />
+        <Button Grid.Row="5"
+                Grid.Column="1"
+                Content="2"
+                Click="btnDigito_Click" />
+        <Button Grid.Row="5"
+                Grid.Column="2"
+                Content="3"
+                Click="btnDigito_Click" />
+        <Button Grid.Row="5"
+                Grid.Column="3"
+                Content="+"
+                Click="btnOperacion_Click" />
+
+        <!-- Fila 6: 0, ,, = -->
+        <Button Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Content="0"
+                Click="btnDigito_Click" />
+        <Button x:Name="btnComa"
+                Grid.Row="6"
+                Grid.Column="2"
+                Content=","
+                Click="btnComa_Click" />
+        <Button x:Name="btnIgual"
+                Grid.Row="6"
+                Grid.Column="3"
+                Content="="
+                Click="btnIgual_Click" />
     </Grid>
 </Window>
