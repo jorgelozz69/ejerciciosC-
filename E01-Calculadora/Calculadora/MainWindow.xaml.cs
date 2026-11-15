@@ -33,6 +33,7 @@ public partial class MainWindow : Window
 
     private void ProcesarDigito(string digito)
     {
+        txtPantalla.FontSize = 36;
         if (_esError)
         {
             ResetearEstado();
@@ -68,6 +69,7 @@ public partial class MainWindow : Window
 
     private void ProcesarComa()
     {
+        txtPantalla.FontSize = 36;
         if (_esError || _esResultado)
         {
             if (_esError)
@@ -237,6 +239,7 @@ public partial class MainWindow : Window
         _nuevoNumero = true;
         _esResultado = false;
         _esError = false;
+        txtPantalla.FontSize = 36;
         txtPantalla.Text = "0";
         txtOperacion.Text = string.Empty;
     }
@@ -248,6 +251,7 @@ public partial class MainWindow : Window
         _operacionPendiente = null;
         _nuevoNumero = true;
         _esResultado = false;
+        txtPantalla.FontSize = 18;
         txtPantalla.Text = MensajeDivisionCero;
         txtOperacion.Text = string.Empty;
     }
