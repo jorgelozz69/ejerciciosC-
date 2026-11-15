@@ -1,23 +1,24 @@
-﻿using System.Text;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Inscripcion;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// Lógica de interacción para MainWindow.xaml
 /// </summary>
 public partial class MainWindow : Window
 {
     public MainWindow()
     {
         InitializeComponent();
+        dtpNacimiento.DisplayDateEnd = DateTime.Today;
     }
+
+    private void chkTodas_Click(object sender, RoutedEventArgs e) { }
+    private void chkExtra_Click(object sender, RoutedEventArgs e) { }
+    private void txtObservaciones_TextChanged(object sender, TextChangedEventArgs e) { }
+    private void txtObservaciones_SelectionChanged(object sender, RoutedEventArgs e) { }
+    private void btnInscribir_Click(object sender, RoutedEventArgs e) { }
+    private void btnLimpiar_Click(object sender, RoutedEventArgs e) { }
 }

@@ -74,8 +74,256 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <!-- Formulario con desplazamiento vertical adaptable -->
             <RowDefinition Height="*" />
+            <!-- Barra inferior con botones fijos -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
+        <!-- Formulario desplazable -->
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="16,16,16,8">
+
+                <!-- 1. Datos del alumno -->
+                <GroupBox Header="Datos del alumno">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Content="_Nombre y apellidos:"
+                               Target="{Binding ElementName=txtNombre}" />
+                        <TextBox x:Name="txtNombre"
+                                 Grid.Row="0"
+                                 Grid.Column="1"
+                                 MaxLength="80" />
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Content="_Fecha de nacimiento:"
+                               Target="{Binding ElementName=dtpNacimiento}" />
+                        <DatePicker x:Name="dtpNacimiento"
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Left"
+                                    Width="160" />
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Content="_Teléfono:"
+                               Target="{Binding ElementName=txtTelefono}" />
+                        <TextBox x:Name="txtTelefono"
+                                 Grid.Row="2"
+                                 Grid.Column="1"
+                                 MaxLength="9"
+                                 Width="130"
+                                 HorizontalAlignment="Left"
+                                 ToolTip="Nueve cifras, sin espacios" />
+                    </Grid>
+                </GroupBox>
+
+                <!-- 2. Curso -->
+                <GroupBox Header="Curso">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Content="_Instrumento:"
+                               Target="{Binding ElementName=cmbInstrumento}" />
+                        <ComboBox x:Name="cmbInstrumento"
+                                  Grid.Row="0"
+                                  Grid.Column="1"
+                                  HorizontalAlignment="Left"
+                                  Width="200"
+                                  AutomationProperties.Name="Instrumento">
+                            <ComboBoxItem Tag="Guitarra" ToolTip="Instrumento de cuerda pulsada con 6 cuerdas">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Source="/Imagenes/guitarra.png" Width="24" Height="24" Margin="0,0,8,0" />
+                                    <TextBlock Text="Guitarra" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ComboBoxItem>
+                            <ComboBoxItem Tag="Piano" ToolTip="Instrumento de teclado y cuerdas percutidas">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Source="/Imagenes/piano.png" Width="24" Height="24" Margin="0,0,8,0" />
+                                    <TextBlock Text="Piano" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ComboBoxItem>
+                            <ComboBoxItem Tag="Bateria" ToolTip="Instrumento de percusión con platos y timbales">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Source="/Imagenes/bateria.png" Width="24" Height="24" Margin="0,0,8,0" />
+                                    <TextBlock Text="Batería" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ComboBoxItem>
+                            <ComboBoxItem Tag="Violin" ToolTip="Instrumento clásico de cuerda frotada con arco">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Image Source="/Imagenes/violin.png" Width="24" Height="24" Margin="0,0,8,0" />
+                                    <TextBlock Text="Violín" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </ComboBoxItem>
+                        </ComboBox>
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Content="Ni_vel:"
+                               Target="{Binding ElementName=rbIniciacion}" />
+                        <StackPanel Grid.Row="1"
+                                    Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <RadioButton x:Name="rbIniciacion"
+                                         Content="Iniciación"
+                                         GroupName="Nivel" />
+                            <RadioButton x:Name="rbMedio"
+                                         Content="Medio"
+                                         GroupName="Nivel" />
+                            <RadioButton x:Name="rbAvanzado"
+                                         Content="Avanzado"
+                                         GroupName="Nivel" />
+                        </StackPanel>
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Content="_Horario:"
+                               Target="{Binding ElementName=rbManana}" />
+                        <StackPanel Grid.Row="2"
+                                    Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+                            <RadioButton x:Name="rbManana"
+                                         Content="Mañana"
+                                         GroupName="Horario" />
+                            <RadioButton x:Name="rbTarde"
+                                         Content="Tarde"
+                                         GroupName="Horario" />
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <!-- 3. Actividades extra (10 € al mes cada una) -->
+                <GroupBox Header="Actividades extra (10 € al mes cada una)">
+                    <StackPanel>
+                        <CheckBox x:Name="chkTodas"
+                                  Content="_Todas las actividades"
+                                  IsThreeState="True"
+                                  Click="chkTodas_Click"
+                                  Margin="0,0,0,8" />
+                        <StackPanel Orientation="Horizontal" Margin="24,0,0,4">
+                            <CheckBox x:Name="chkCoro"
+                                      Content="C_oro"
+                                      Click="chkExtra_Click" />
+                            <CheckBox x:Name="chkLenguaje"
+                                      Content="_Lenguaje musical"
+                                      Click="chkExtra_Click" />
+                            <CheckBox x:Name="chkConciertos"
+                                      Content="_Conciertos"
+                                      Click="chkExtra_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- 4. Observaciones -->
+                <GroupBox Header="Observaciones">
+                    <StackPanel>
+                        <Label Content="O_bservaciones:"
+                               Target="{Binding ElementName=txtObservaciones}"
+                               Padding="0,0,0,4" />
+                        <TextBox x:Name="txtObservaciones"
+                                 Height="90"
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"
+                                 VerticalScrollBarVisibility="Auto"
+                                 MaxLength="500"
+                                 SpellCheck.IsEnabled="True"
+                                 xml:lang="es-ES"
+                                 AutomationProperties.Name="Observaciones"
+                                 TextChanged="txtObservaciones_TextChanged"
+                                 SelectionChanged="txtObservaciones_SelectionChanged" />
+                        <TextBlock x:Name="txtContador"
+                                   Text="0 / 500"
+                                   HorizontalAlignment="Right"
+                                   Foreground="Gray"
+                                   FontSize="12"
+                                   Margin="0,4,0,0" />
+                    </StackPanel>
+                </GroupBox>
+
+                <!-- 5. Acceso al portal del alumno -->
+                <GroupBox Header="Acceso al portal del alumno">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Content="_Usuario:"
+                               Target="{Binding ElementName=txtUsuario}" />
+                        <TextBox x:Name="txtUsuario"
+                                 Grid.Row="0"
+                                 Grid.Column="1"
+                                 MaxLength="20"
+                                 Width="180"
+                                 HorizontalAlignment="Left" />
+
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               Content="Con_traseña:"
+                               Target="{Binding ElementName=pwdContrasena}" />
+                        <PasswordBox x:Name="pwdContrasena"
+                                     Grid.Row="1"
+                                     Grid.Column="1"
+                                     MaxLength="20"
+                                     Width="180"
+                                     HorizontalAlignment="Left"
+                                     ToolTip="Entre 8 y 20 caracteres"
+                                     AutomationProperties.Name="Contraseña" />
+
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               Content="_Repetir contraseña:"
+                               Target="{Binding ElementName=pwdRepetir}" />
+                        <PasswordBox x:Name="pwdRepetir"
+                                     Grid.Row="2"
+                                     Grid.Column="1"
+                                     MaxLength="20"
+                                     Width="180"
+                                     HorizontalAlignment="Left"
+                                     AutomationProperties.Name="Repetir contraseña" />
+                    </Grid>
+                </GroupBox>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Barra inferior: Botones siempre visibles -->
+        <Border Grid.Row="1" Background="#F3F4F6" BorderBrush="#E5E7EB" BorderThickness="0,1,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="16,8">
+                <Button x:Name="btnLimpiar" Content="Li_mpiar" Click="btnLimpiar_Click" />
+                <Button x:Name="btnInscribir" Content="Inscribirm_e" IsDefault="True" Click="btnInscribir_Click" />
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
