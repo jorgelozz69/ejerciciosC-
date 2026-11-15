@@ -12,15 +12,13 @@
         MinWidth="420">
 
     <Window.Resources>
-        <!-- Pincel con el color corporativo de la tarjeta -->
+        <!-- Color temático de la tarjeta -->
         <SolidColorBrush x:Key="ColorTarjeta" Color="#1E88E5" />
 
         <!-- Estilo base para los botones de acción -->
         <Style x:Key="BotonTarjeta" TargetType="Button">
             <Setter Property="Padding" Value="12,6" />
             <Setter Property="Margin" Value="0,0,8,0" />
-            <Setter Property="Background" Value="#F3F4F6" />
-            <Setter Property="BorderBrush" Value="#D1D5DB" />
             <Setter Property="Cursor" Value="Hand" />
         </Style>
     </Window.Resources>
@@ -36,5 +34,86 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
+        <!-- Avatar: Primera columna, ocupando dos filas -->
+        <Grid Grid.Row="0"
+              Grid.RowSpan="2"
+              Grid.Column="0"
+              Width="96"
+              Height="96"
+              Margin="0,0,16,12"
+              VerticalAlignment="Top">
+            <Ellipse>
+                <Ellipse.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#42A5F5" Offset="0.0" />
+                        <GradientStop Color="#1565C0" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <TextBlock Text="MR"
+                       Foreground="White"
+                       FontSize="34"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+        </Grid>
+
+        <!-- Nombre en grande: Primera fila, segunda columna -->
+        <TextBlock Grid.Row="0"
+                   Grid.Column="1"
+                   Text="Marta Ríos"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   Margin="0,0,0,4" />
+
+        <!-- Presentación con texto enriquecido: Segunda fila, segunda columna -->
+        <TextBlock x:Name="txtPresentacion"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   TextWrapping="Wrap"
+                   FontSize="14"
+                   LineHeight="22">
+            <Run Text="Hola, soy " /><Bold>Marta Ríos</Bold><Run Text=", " /><Italic>diseñadora de interfaces de escritorio en Sevilla</Italic><Run Text="." /><LineBreak />
+            <Span Foreground="{StaticResource ColorTarjeta}">
+                <Run Text="Puedes ver mis trabajos en mi " /><Hyperlink NavigateUri="https://example.org/martarios" RequestNavigate="Hyperlink_RequestNavigate">portafolio</Hyperlink><Run Text=" o escribirme." />
+            </Span>
+            <Run Foreground="Gray" FontStyle="Italic" Text=" (Respondo en 24 horas.)" />
+        </TextBlock>
+
+        <!-- Tercera fila: Título 'Habilidades' y WrapPanel vacío para rellenar desde C# -->
+        <StackPanel Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,16,0,8">
+            <TextBlock Text="Habilidades"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Margin="0,0,0,8" />
+            <WrapPanel x:Name="pnlHabilidades" />
+        </StackPanel>
+
+        <!-- Cuarta fila: Panel de botones con btnContactar compuesto -->
+        <StackPanel x:Name="pnlBotones"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Bottom">
+            <Button x:Name="btnContactar"
+                    Style="{StaticResource BotonTarjeta}"
+                    Click="btnContactar_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="✉"
+                               Foreground="{StaticResource ColorTarjeta}"
+                               Margin="0,0,6,0" />
+                    <TextBlock Text="Contactar"
+                               FontWeight="Bold"
+                               Margin="0,0,6,0" />
+                    <TextBlock Text="· respuesta en 24 h"
+                               Foreground="Gray" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>
