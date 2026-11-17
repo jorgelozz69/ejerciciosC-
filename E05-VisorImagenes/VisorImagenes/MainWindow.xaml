@@ -5,8 +5,224 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VisorImagenes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Visor de imágenes"
+        MinWidth="640" MinHeight="420"
+        Width="800" Height="550"
+        WindowStartupLocation="CenterScreen"
+        Icon="pack://application:,,,/Imagenes/visor.ico"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        Closing="Window_Closing">
 
-    </Grid>
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="Abrir_Executed" />
+    </Window.CommandBindings>
+
+    <DockPanel>
+        <!-- Barra superior: Menú principal -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem x:Name="mnuArchivo" Header="_Archivo">
+                <MenuItem Header="_Abrir imágenes…"
+                          Command="ApplicationCommands.Open"
+                          InputGestureText="Ctrl+O" />
+                <MenuItem x:Name="mnuCerrarTodas"
+                          Header="_Cerrar todas"
+                          Click="CerrarTodas_Click"
+                          InputGestureText="Ctrl+W" />
+                <Separator />
+                <MenuItem Header="_Salir"
+                          Click="Salir_Click"
+                          InputGestureText="Alt+F4" />
+            </MenuItem>
+            <MenuItem x:Name="mnuVer" Header="_Ver">
+                <MenuItem x:Name="mnuAnterior"
+                          Header="Imagen _anterior"
+                          Click="Anterior_Click"
+                          InputGestureText="←" />
+                <MenuItem x:Name="mnuSiguiente"
+                          Header="Imagen _siguiente"
+                          Click="Siguiente_Click"
+                          InputGestureText="→" />
+                <Separator />
+                <MenuItem x:Name="mnuAcercar"
+                          Header="_Acercar"
+                          Click="Acercar_Click"
+                          InputGestureText="Ctrl++" />
+                <MenuItem x:Name="mnuAlejar"
+                          Header="A_lejar"
+                          Click="Alejar_Click"
+                          InputGestureText="Ctrl+-" />
+                <MenuItem x:Name="mnuTamanoReal"
+                          Header="_Tamaño real"
+                          Click="TamanoReal_Click"
+                          InputGestureText="Ctrl+0" />
+                <MenuItem x:Name="mnuAjustar"
+                          Header="A_justar a la ventana"
+                          Click="Ajustar_Click"
+                          InputGestureText="Ctrl+1" />
+                <Separator />
+                <MenuItem Header="_Tema">
+                    <MenuItem x:Name="mnuTemaClaro"
+                              Header="_Claro"
+                              IsCheckable="True"
+                              Click="mnuTema_Click" />
+                    <MenuItem x:Name="mnuTemaOscuro"
+                              Header="_Oscuro"
+                              IsCheckable="True"
+                              Click="mnuTema_Click" />
+                    <MenuItem x:Name="mnuTemaSistema"
+                              Header="Del _sistema"
+                              IsCheckable="True"
+                              Click="mnuTema_Click" />
+                </MenuItem>
+                <Separator />
+                <MenuItem x:Name="mnuMostrarLista"
+                          Header="_Mostrar la lista"
+                          IsCheckable="True"
+                          IsChecked="True"
+                          Click="MostrarLista_Click"
+                          InputGestureText="Ctrl+L" />
+            </MenuItem>
+            <MenuItem x:Name="mnuAyuda" Header="A_yuda">
+                <MenuItem Header="Acerca _de…"
+                          Click="AcercaDe_Click"
+                          InputGestureText="F1" />
+            </MenuItem>
+        </Menu>
+
+        <!-- Barra de herramientas superior -->
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button Command="ApplicationCommands.Open"
+                        Style="{StaticResource BotonBarra}"
+                        ToolTip="Abrir imágenes (Ctrl+O)">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="📂" Margin="0,0,4,0" VerticalAlignment="Center" />
+                        <TextBlock Text="Abrir" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+                <Separator />
+                <Button x:Name="btnAnterior"
+                        Content="◀"
+                        Style="{StaticResource BotonBarra}"
+                        Click="Anterior_Click"
+                        ToolTip="Imagen anterior (←)"
+                        AutomationProperties.Name="Imagen anterior" />
+                <Button x:Name="btnSiguiente"
+                        Content="▶"
+                        Style="{StaticResource BotonBarra}"
+                        Click="Siguiente_Click"
+                        ToolTip="Imagen siguiente (→)"
+                        AutomationProperties.Name="Imagen siguiente" />
+                <Separator />
+                <Button x:Name="btnAlejar"
+                        Content="−"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BotonBarra}"
+                        Click="Alejar_Click"
+                        ToolTip="Alejar (Ctrl+-)"
+                        AutomationProperties.Name="Alejar" />
+                <Button x:Name="btnAcercar"
+                        Content="+"
+                        FontSize="14"
+                        FontWeight="Bold"
+                        Style="{StaticResource BotonBarra}"
+                        Click="Acercar_Click"
+                        ToolTip="Acercar (Ctrl++)"
+                        AutomationProperties.Name="Acercar" />
+                <Button x:Name="btnTamanoReal"
+                        Content="1:1"
+                        FontWeight="SemiBold"
+                        Style="{StaticResource BotonBarra}"
+                        Click="TamanoReal_Click"
+                        ToolTip="Tamaño real (Ctrl+0)"
+                        AutomationProperties.Name="Tamaño real" />
+                <Button x:Name="btnAjustar"
+                        Content="Ajustar"
+                        Style="{StaticResource BotonBarra}"
+                        Click="Ajustar_Click"
+                        ToolTip="Ajustar a la ventana (Ctrl+1)"
+                        AutomationProperties.Name="Ajustar a la ventana" />
+            </ToolBar>
+        </ToolBarTray>
+
+        <!-- Barra de estado inferior -->
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+
+            <StatusBarItem Grid.Column="0">
+                <TextBlock x:Name="txtEstadoNombre"
+                           Style="{StaticResource TextoEstado}"
+                           Text="Sin imágenes" />
+            </StatusBarItem>
+            <Separator Grid.Column="1" />
+            <StatusBarItem Grid.Column="2">
+                <TextBlock x:Name="txtEstadoTamano"
+                           Style="{StaticResource TextoEstado}"
+                           Text="" />
+            </StatusBarItem>
+            <StatusBarItem Grid.Column="3">
+                <TextBlock x:Name="txtEstadoZoom"
+                           Style="{StaticResource TextoEstado}"
+                           Text="" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- Área principal de trabajo dividida en tres columnas -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="colLista" Width="220" MinWidth="100" />
+                <ColumnDefinition x:Name="colSeparador" Width="Auto" />
+                <ColumnDefinition x:Name="colVisor" Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Columna 0: Lista de imágenes -->
+            <ListBox x:Name="lstImagenes"
+                     Grid.Column="0"
+                     SelectionChanged="lstImagenes_SelectionChanged"
+                     HorizontalContentAlignment="Stretch"
+                     ScrollViewer.HorizontalScrollBarVisibility="Auto" />
+
+            <!-- Columna 1: Separador redimensionable -->
+            <GridSplitter x:Name="splLista"
+                          Grid.Column="1"
+                          Width="5"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Stretch"
+                          ShowsPreview="True"
+                          Cursor="SizeWE"
+                          Background="#CCCCCC" />
+
+            <!-- Columna 2: Visor de imagen y mensaje central -->
+            <Grid Grid.Column="2" x:Name="grdVisor" ClipToBounds="True">
+                <ScrollViewer x:Name="scvImagen"
+                              HorizontalScrollBarVisibility="Disabled"
+                              VerticalScrollBarVisibility="Disabled"
+                              PreviewMouseWheel="scvImagen_PreviewMouseWheel"
+                              Focusable="False">
+                    <Image x:Name="imgVista"
+                           Stretch="Uniform"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           RenderOptions.BitmapScalingMode="HighQuality" />
+                </ScrollViewer>
+
+                <TextBlock x:Name="txtMensaje"
+                           Style="{StaticResource MensajeCentral}"
+                           Text="No hay ninguna imagen abierta.&#x0a;Usa el menú Archivo > Abrir imágenes... o pulsa Ctrl+O."
+                           Visibility="Visible" />
+            </Grid>
+        </Grid>
+    </DockPanel>
 </Window>

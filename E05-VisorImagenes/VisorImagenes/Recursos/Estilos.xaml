@@ -1,0 +1,46 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Recurso dinámico para el color del mensaje central según el tema -->
+    <SolidColorBrush x:Key="ColorMensajeCentral" Color="#666666" />
+
+    <!-- Estilo para los botones de la barra de herramientas -->
+    <Style x:Key="BotonBarra" TargetType="Button">
+        <Setter Property="Margin" Value="2,0" />
+        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="MinHeight" Value="26" />
+        <Setter Property="MinWidth" Value="28" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+        <!-- Permite mostrar el ToolTip incluso cuando el botón está inactivo -->
+        <Setter Property="ToolTipService.ShowOnDisabled" Value="True" />
+        <Style.Triggers>
+            <!-- Desencadenador para atenuar los botones cuando están deshabilitados -->
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.4" />
+                <Setter Property="Cursor" Value="Arrow" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Estilo para los bloques de texto de la barra de estado -->
+    <Style x:Key="TextoEstado" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="6,2" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <!-- Estilo para el mensaje informativo central -->
+    <Style x:Key="MensajeCentral" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Margin" Value="24" />
+        <Setter Property="MaxWidth" Value="520" />
+        <!-- Color dependiente dinámicamente del tema actual -->
+        <Setter Property="Foreground" Value="{DynamicResource ColorMensajeCentral}" />
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,57 @@
+<Window x:Class="VisorImagenes.Ventanas.VentanaAcercaDe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Acerca de Visor de imágenes"
+        Width="390" Height="230"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Icon="pack://application:,,,/Imagenes/visor.ico">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0"
+                   Source="pack://application:,,,/Imagenes/visor.ico"
+                   Width="48" Height="48"
+                   VerticalAlignment="Top"
+                   Margin="0,4,18,0" />
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                <TextBlock Text="Visor de imágenes"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Margin="0,0,0,4" />
+                <TextBlock Text="Versión 1.0 · .NET 10 WPF"
+                           FontSize="12"
+                           Foreground="Gray"
+                           Margin="0,0,0,10" />
+                <TextBlock Text="Visor de imágenes de escritorio completo con atajos, zoom interactivo, temas y persistencia de configuración."
+                           FontSize="12"
+                           TextWrapping="Wrap"
+                           Foreground="#444444"
+                           Margin="0,0,0,4" />
+                <TextBlock Text="Desarrollo de Interfaces (2º DAM)"
+                           FontSize="11"
+                           FontStyle="Italic"
+                           Foreground="Gray" />
+            </StackPanel>
+        </Grid>
+
+        <Button Grid.Row="1"
+                Content="_Aceptar"
+                IsDefault="True"
+                IsCancel="True"
+                HorizontalAlignment="Right"
+                Padding="20,6"
+                Margin="0,16,0,0" />
+    </Grid>
+</Window>
