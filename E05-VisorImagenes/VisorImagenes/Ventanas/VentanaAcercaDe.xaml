@@ -6,7 +6,7 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
-        Icon="pack://application:,,,/Imagenes/visor.ico">
+        Icon="pack://application:,,,/VisorImagenes;component/Imagenes/visor.ico">
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
 
             <Image Grid.Column="0"
-                   Source="pack://application:,,,/Imagenes/visor.ico"
+                   Source="pack://application:,,,/VisorImagenes;component/Imagenes/visor.ico"
                    Width="48" Height="48"
                    VerticalAlignment="Top"
                    Margin="0,4,18,0" />

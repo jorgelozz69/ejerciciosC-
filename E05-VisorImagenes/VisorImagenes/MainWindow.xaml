@@ -9,7 +9,7 @@
         MinWidth="640" MinHeight="420"
         Width="800" Height="550"
         WindowStartupLocation="CenterScreen"
-        Icon="pack://application:,,,/Imagenes/visor.ico"
+        Icon="pack://application:,,,/VisorImagenes;component/Imagenes/visor.ico"
         PreviewKeyDown="Window_PreviewKeyDown"
         Closing="Window_Closing">
 
