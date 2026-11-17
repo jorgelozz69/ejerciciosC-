@@ -5,8 +5,137 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Autoevaluacion"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Test de autoevaluación"
+        Width="640" Height="460"
+        MinWidth="480" MinHeight="400"
+        WindowStartupLocation="CenterScreen"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        Closing="Window_Closing">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
+        <!-- Cabecera: Progreso y Puntos -->
+        <Grid Grid.Row="0" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="txtProgreso"
+                       Grid.Column="0"
+                       Text="Pregunta 1 de 5"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Foreground="#444444"
+                       VerticalAlignment="Center" />
+            <TextBlock x:Name="txtPuntos"
+                       Grid.Column="1"
+                       Text="Puntos: 0"
+                       FontSize="15"
+                       FontWeight="Bold"
+                       Foreground="#1A5276"
+                       VerticalAlignment="Center" />
+        </Grid>
+
+        <!-- Enunciado de la pregunta -->
+        <TextBlock x:Name="txtEnunciado"
+                   Grid.Row="1"
+                   Text="¿Enunciado de la pregunta?"
+                   FontSize="16"
+                   FontWeight="Medium"
+                   TextWrapping="Wrap"
+                   Margin="0,0,0,16" />
+
+        <!-- Opciones de respuesta -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="pnlOpciones"
+                        RadioButton.Checked="pnlOpciones_Checked">
+                <RadioButton x:Name="rbOpcionA"
+                             Tag="A"
+                             Content="A) Opción A"
+                             Margin="0,4,0,6"
+                             FontSize="14"
+                             Cursor="Hand"
+                             MouseRightButtonUp="rbOpcion_MouseRightButtonUp"
+                             MouseEnter="rbOpcion_MouseEnter"
+                             MouseLeave="rbOpcion_MouseLeave" />
+                <RadioButton x:Name="rbOpcionB"
+                             Tag="B"
+                             Content="B) Opción B"
+                             Margin="0,4,0,6"
+                             FontSize="14"
+                             Cursor="Hand"
+                             MouseRightButtonUp="rbOpcion_MouseRightButtonUp"
+                             MouseEnter="rbOpcion_MouseEnter"
+                             MouseLeave="rbOpcion_MouseLeave" />
+                <RadioButton x:Name="rbOpcionC"
+                             Tag="C"
+                             Content="C) Opción C"
+                             Margin="0,4,0,6"
+                             FontSize="14"
+                             Cursor="Hand"
+                             MouseRightButtonUp="rbOpcion_MouseRightButtonUp"
+                             MouseEnter="rbOpcion_MouseEnter"
+                             MouseLeave="rbOpcion_MouseLeave" />
+                <RadioButton x:Name="rbOpcionD"
+                             Tag="D"
+                             Content="D) Opción D"
+                             Margin="0,4,0,6"
+                             FontSize="14"
+                             Cursor="Hand"
+                             MouseRightButtonUp="rbOpcion_MouseRightButtonUp"
+                             MouseEnter="rbOpcion_MouseEnter"
+                             MouseLeave="rbOpcion_MouseLeave" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Texto de ayuda contextual -->
+        <TextBlock x:Name="txtAyuda"
+                   Grid.Row="3"
+                   Text=""
+                   FontSize="12"
+                   FontStyle="Italic"
+                   Foreground="Gray"
+                   MinHeight="18"
+                   Margin="0,4,0,6" />
+
+        <!-- Resultado y explicación -->
+        <TextBlock x:Name="txtResultado"
+                   Grid.Row="4"
+                   Text=""
+                   FontSize="13"
+                   TextWrapping="Wrap"
+                   MinHeight="44"
+                   Margin="0,2,0,14" />
+
+        <!-- Botones de acción -->
+        <StackPanel Grid.Row="5"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button x:Name="btnGuardar"
+                    Content="_Guardar resultado"
+                    Padding="14,6"
+                    Margin="0,0,8,0"
+                    IsEnabled="False"
+                    Click="btnGuardar_Click" />
+            <Button x:Name="btnCorregir"
+                    Content="_Corregir"
+                    Padding="16,6"
+                    Margin="0,0,8,0"
+                    IsDefault="True"
+                    IsEnabled="False"
+                    Click="btnCorregir_Click" />
+            <Button x:Name="btnSiguiente"
+                    Content="_Siguiente"
+                    Padding="16,6"
+                    IsEnabled="False"
+                    Click="btnSiguiente_Click" />
+        </StackPanel>
     </Grid>
 </Window>
